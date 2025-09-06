@@ -6,7 +6,7 @@ alias HTTP_DATE_FORMAT = "ddd, DD MMM YYYY HH:mm:ss ZZZ"
 alias TZ_GMT = TimeZone(0, "GMT")
 
 
-@value
+@fieldwise_init
 struct Expiration(Copyable, Movable):
     var variant: UInt8
     var datetime: Optional[SmallTime]

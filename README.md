@@ -5,7 +5,7 @@
 <div align="center">
     <img src="static/logo.png" alt="Logo" width="250" height="250">
 
-  <h3 align="center">Lightbug</h3>
+  <h3 align="center">Lightdg</h3>
 
   <p align="center">
     🐝 A Mojo HTTP framework with wings 🔥
@@ -24,11 +24,11 @@
 
 ## Overview
 
-Lightbug is a simple and sweet HTTP framework for Mojo that builds on best practice from systems programming, such as the Golang [FastHTTP](https://github.com/valyala/fasthttp/) and Rust [may_minihttp](https://github.com/Xudong-Huang/may_minihttp/). 
+Lightdg is a simple and sweet HTTP framework for Mojo that builds on best practice from systems programming, such as the Golang [FastHTTP](https://github.com/valyala/fasthttp/) and Rust [may_minihttp](https://github.com/Xudong-Huang/may_minihttp/). 
 
 This is not production ready yet. We're aiming to keep up with new developments in Mojo, but it might take some time to get to a point when this is safe to use in real-world applications.
 
-Lightbug currently has the following features:
+Lightdg currently has the following features:
  - [x] Pure Mojo! No Python dependencies. Everything is fully typed, with no `def` functions used
  - [x] HTTP Server and Client implementations
  - [x] TCP and UDP support
@@ -45,7 +45,7 @@ Lightbug currently has the following features:
 <!-- GETTING STARTED -->
 ## Getting Started
 
-The only hard dependency for `lightbug_http` is Mojo. 
+The only hard dependency for `lightdg` is Mojo. 
 Learn how to get up and running with Mojo on the [Modular website](https://www.modular.com/max/mojo).
 Once you have a Mojo project set up locally,
 
@@ -56,36 +56,36 @@ Once you have a Mojo project set up locally,
    channels = ["conda-forge", "https://conda.modular.com/max", "https://repo.prefix.dev/modular-community"]
    ```
 
-2. Add `lightbug_http` as a dependency:
+2. Add `lightdg` as a dependency:
 
    ```toml
    [dependencies]
-   lightbug_http = ">=25.4.0"
+   lightdg = ">=25.4.0"
    ```
 
 3. Run `magic install` at the root of your project, where `mojoproject.toml` is located
-4. Lightbug should now be installed as a dependency. You can import all the default imports at once, e.g:
+4. Lightdg should now be installed as a dependency. You can import all the default imports at once, e.g:
 
     ```mojo
-    from lightbug_http import *
+    from lightdg import *
     ```
 
     or import individual structs and functions, e.g. 
 
     ```mojo
-    from lightbug_http.service import HTTPService
-    from lightbug_http.http import HTTPRequest, HTTPResponse, OK, NotFound
+    from lightdg.service import HTTPService
+    from lightdg.http import HTTPRequest, HTTPResponse, OK, NotFound
     ```
 
     there are some default handlers you can play with:
 
     ```mojo
-    from lightbug_http.service import Printer # prints request details to console
-    from lightbug_http.service import Welcome # serves an HTML file with an image (currently requires manually adding files to static folder, details below)
-    from lightbug_http.service import ExampleRouter # serves /, /first, /second, and /echo routes
+    from lightdg.service import Printer # prints request details to console
+    from lightdg.service import Welcome # serves an HTML file with an image (currently requires manually adding files to static folder, details below)
+    from lightdg.service import ExampleRouter # serves /, /first, /second, and /echo routes
     ```
 
-5. Add your handler in `lightbug.🔥` by passing a struct that satisfies the following trait:
+5. Add your handler in `lightdg.🔥` by passing a struct that satisfies the following trait:
 
    ```mojo
    trait HTTPService:
@@ -96,9 +96,9 @@ Once you have a Mojo project set up locally,
    For example, to make a `Printer` service that prints some details about the request to console:
 
    ```mojo
-    from lightbug_http.http import HTTPRequest, HTTPResponse, OK
-    from lightbug_http.strings import to_string
-    from lightbug_http.header import HeaderKey
+    from lightdg.http import HTTPRequest, HTTPResponse, OK
+    from lightdg.strings import to_string
+    from lightdg.header import HeaderKey
 
     @value
     struct Printer(HTTPService):
@@ -117,7 +117,7 @@ Once you have a Mojo project set up locally,
 6. Start a server listening on a port with your service like so.
 
     ```mojo
-    from lightbug_http import Welcome, Server
+    from lightdg import Welcome, Server
 
     fn main() raises:
         var server = Server()
@@ -129,13 +129,13 @@ Feel free to change the settings in `listen_and_serve()` to serve on a particula
 
 Now send a request `localhost:8080`. You should see some details about the request printed out to the console.
 
-Congrats 🥳 You're using Lightbug!
+Congrats 🥳 You're using Lightdg!
 
 
 Routing is not in scope for this library, but you can easily set up routes yourself:
 
 ```mojo
-from lightbug_http import *
+from lightdg import *
 
 @value
 struct ExampleRouter(HTTPService):
@@ -155,18 +155,18 @@ struct ExampleRouter(HTTPService):
         return OK(body)
 ```
 
-We plan to add more advanced routing functionality in a future library called `lightbug_api`, see [Roadmap](#roadmap) for more details.
+We plan to add more advanced routing functionality in a future library called `lightdg_api`, see [Roadmap](#roadmap) for more details.
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Serving static files
 
-The default welcome screen shows an example of how to serve files like images or HTML using Lightbug. Mojo has built-in `open`, `read` and `read_bytes` methods that you can use to read files and serve them on a route. Assuming you copy an html file and image from the Lightbug repo into a `static` directory at the root of your repo:
+The default welcome screen shows an example of how to serve files like images or HTML using Lightdg. Mojo has built-in `open`, `read` and `read_bytes` methods that you can use to read files and serve them on a route. Assuming you copy an html file and image from the Lightdg repo into a `static` directory at the root of your repo:
 
 ```mojo
-from lightbug_http import *
-from lightbug_http.io.bytes import Bytes
+from lightdg import *
+from lightdg.io.bytes import Bytes
 
 @value
 struct Welcome(HTTPService):
@@ -175,7 +175,7 @@ struct Welcome(HTTPService):
 
         if uri.path == "/":
             var html: Bytes
-            with open("static/lightbug_welcome.html", "r") as f:
+            with open("static/lightdg_welcome.html", "r") as f:
                 html = Bytes(f.read_bytes())
             return OK(html, "text/html; charset=utf-8")
 
@@ -193,8 +193,8 @@ struct Welcome(HTTPService):
 Create a file, e.g `client.mojo` with the following code. Run `magic run mojo client.mojo` to execute the request to a given URL.
 
 ```mojo
-from lightbug_http import *
-from lightbug_http.client import Client
+from lightdg import *
+from lightdg.client import Client
 
 fn test_request(mut client: Client) raises -> None:
     var uri = URI.parse("google.com")
@@ -230,11 +230,11 @@ To get started with UDP, just use the `listen_udp` and `dial_udp` functions, alo
 
 On the client:
 ```mojo
-from lightbug_http.connection import dial_udp
-from lightbug_http.address import UDPAddr
+from lightdg.connection import dial_udp
+from lightdg.address import UDPAddr
 from utils import StringSlice
 
-alias test_string = "Hello, lightbug!"
+alias test_string = "Hello, lightdg!"
 
 fn main() raises:
     print("Dialing UDP server...")
@@ -279,25 +279,25 @@ fn main() raises:
 
 We're working on support for the following (contributors welcome!):
 
- - [ ] [JSON support](https://github.com/saviorand/lightbug_http/issues/4)
+ - [ ] [JSON support](https://github.com/saviorand/lightdg/issues/4)
  - [ ] Complete HTTP/1.x support compliant with RFC 9110/9112 specs (see issues)
- - [ ] [SSL/HTTPS support](https://github.com/saviorand/lightbug_http/issues/20)
- - [ ] [Multiple simultaneous connections](https://github.com/saviorand/lightbug_http/issues/5), [parallelization and performance optimizations](https://github.com/saviorand/lightbug_http/issues/6)
- - [ ] [HTTP 2.0/3.0 support](https://github.com/saviorand/lightbug_http/issues/8)
+ - [ ] [SSL/HTTPS support](https://github.com/saviorand/lightdg/issues/20)
+ - [ ] [Multiple simultaneous connections](https://github.com/saviorand/lightdg/issues/5), [parallelization and performance optimizations](https://github.com/saviorand/lightdg/issues/6)
+ - [ ] [HTTP 2.0/3.0 support](https://github.com/saviorand/lightdg/issues/8)
 
 The plan is to get to a feature set similar to Python frameworks like [Starlette](https://github.com/encode/starlette), but with better performance.
 
-Our vision is to develop three libraries, with `lightbug_http` (this repo) as a starting point: 
- - `lightbug_http` - Lightweight and simple HTTP framework, basic networking primitives
- - [`lightbug_api`](https://github.com/saviorand/lightbug_api) - Tools to make great APIs fast, with OpenAPI support and automated docs
- - `lightbug_web` - (release date TBD) Full-stack web framework for Mojo, similar to NextJS or SvelteKit
+Our vision is to develop three libraries, with `lightdg` (this repo) as a starting point: 
+ - `lightdg` - Lightweight and simple HTTP framework, basic networking primitives
+ - [`lightdg_api`](https://github.com/saviorand/lightdg_api) - Tools to make great APIs fast, with OpenAPI support and automated docs
+ - `lightdg_web` - (release date TBD) Full-stack web framework for Mojo, similar to NextJS or SvelteKit
 
 The idea is to get to a point where the entire codebase of a simple modern web application can be written in Mojo. 
 
 We don't make any promises, though -- this is just a vision, and whether we get there or not depends on many factors, including the support of the community.
 
 
-See the [open issues](https://github.com/saviorand/lightbug_http/issues) and submit your own to help drive the development of Lightbug.
+See the [open issues](https://github.com/saviorand/lightdg/issues) and submit your own to help drive the development of Lightdg.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -356,19 +356,19 @@ We were drawing a lot on the following projects:
 ## Contributors
 Want your name to show up here? See [CONTRIBUTING.md](./CONTRIBUTING.md)!
 
-<a href="https://github.com/saviorand/lightbug_http/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=saviorand/lightbug_http&max=100" />
+<a href="https://github.com/saviorand/lightdg/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=saviorand/lightdg&max=100" />
 </a>
 
 <sub>Made with [contrib.rocks](https://contrib.rocks).</sub>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[build-shield]: https://img.shields.io/github/actions/workflow/status/saviorand/lightbug_http/.github%2Fworkflows%2Fpackage.yml
+[build-shield]: https://img.shields.io/github/actions/workflow/status/saviorand/lightdg/.github%2Fworkflows%2Fpackage.yml
 [language-shield]: https://img.shields.io/badge/language-mojo-orange
-[license-shield]: https://img.shields.io/github/license/saviorand/lightbug_http?logo=github
-[license-url]: https://github.com/saviorand/lightbug_http/blob/main/LICENSE
+[license-shield]: https://img.shields.io/github/license/saviorand/lightdg?logo=github
+[license-url]: https://github.com/saviorand/lightdg/blob/main/LICENSE
 [contributors-shield]: https://img.shields.io/badge/contributors-welcome!-blue
-[contributors-url]: https://github.com/saviorand/lightbug_http#contributing
+[contributors-url]: https://github.com/saviorand/lightdg#contributing
 [discord-shield]: https://img.shields.io/discord/1192127090271719495?style=flat&logo=discord&logoColor=white
 [discord-url]: https://discord.gg/VFWETkTgrr

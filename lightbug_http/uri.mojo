@@ -93,8 +93,8 @@ struct PortBounds:
     alias ZERO: UInt8 = ord("0")
 
 
-@value
-struct Scheme(Hashable, EqualityComparable, Representable, Stringable, Writable):
+@fieldwise_init
+struct Scheme(Hashable, EqualityComparable, Representable, Stringable, Writable,Copyable,Movable):
     var value: String
     alias HTTP = Self("http")
     alias HTTPS = Self("https")
@@ -118,8 +118,8 @@ struct Scheme(Hashable, EqualityComparable, Representable, Stringable, Writable)
         return self.value.upper()
 
 
-@value
-struct URI(Writable, Stringable, Representable):
+@fieldwise_init
+struct URI(Writable, Stringable, Representable,Copyable,Movable):
     var _original_path: String
     var scheme: String
     var path: String
@@ -209,12 +209,12 @@ struct URI(Writable, Stringable, Representable):
 
             for item in query_items:
                 var key_val = item.split(QueryDelimiters.ITEM_ASSIGN, 1)
-                var key = unquote[expand_plus=True](key_val[0])
+                var key = unquote[expand_plus=True](String(key_val[0]))
 
                 if key:
                     queries[key] = ""
                     if len(key_val) == 2:
-                        queries[key] = unquote[expand_plus=True](key_val[1])
+                        queries[key] = unquote[expand_plus=True](String(key_val[1]))
 
         return URI(
             _original_path=original_path,

@@ -133,8 +133,8 @@ struct FakeServer(ServerTrait):
         ...
 
 
-@value
-struct FakeResponder(HTTPService):
+@fieldwise_init
+struct FakeResponder(HTTPService,Copyable,Movable):
     fn func(mut self, req: HTTPRequest) raises -> HTTPResponse:
         var method = req.method
         if method != "GET":
@@ -142,8 +142,7 @@ struct FakeResponder(HTTPService):
         return OK(bytes("Hello, world!"))
 
 
-@value
-struct FakeConnection(Connection):
+struct FakeConnection(Connection,Copyable,Movable):
     fn __init__(out self, laddr: String, raddr: String) raises:
         ...
 
@@ -166,8 +165,8 @@ struct FakeConnection(Connection):
         return TCPAddr()
 
 
-@value
-struct FakeListener:
+
+struct FakeListener(Copyable,Movable):
     var request_count: Int
     var request: Bytes
     var closed: Bool
@@ -198,8 +197,8 @@ struct FakeListener:
         return TCPAddr()
 
 
-@value
-struct TestStruct:
+
+struct TestStruct(Copyable,Movable):
     var a: String
     var b: String
     var c: Bytes
@@ -221,8 +220,7 @@ struct TestStruct:
         return Self(a, self.b)
 
 
-@value
-struct TestStructNested:
+struct TestStructNested(Copyable,Movable):
     var a: String
     var b: Int
 

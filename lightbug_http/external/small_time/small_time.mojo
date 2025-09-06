@@ -374,8 +374,7 @@ fn from_ordinal(ordinal: Int) -> SmallTime:
     return SmallTime(year, month, n + 1)
 
 
-@value
-struct SmallTime(Stringable, Writable, Representable):
+struct SmallTime(Stringable, Writable, Representable,Copyable,Movable):
     """Datetime representation."""
     var year: Int
     """Year."""

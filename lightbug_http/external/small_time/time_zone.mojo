@@ -80,8 +80,8 @@ fn from_utc(utc_str: String) raises -> TimeZone:
     return TimeZone(offset)
 
 
-@value
-struct TimeZone(Stringable):
+
+struct TimeZone(Stringable,Copyable,Movable):
     """Timezone."""
     var offset: Int
     """Offset in seconds."""

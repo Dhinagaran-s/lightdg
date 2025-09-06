@@ -1,7 +1,6 @@
 # TODO: Apply this to request/response structs
-@value
 @register_passable("trivial")
-struct HttpVersion(EqualityComparable, Stringable):
+struct HttpVersion(EqualityComparable, Stringable,Copyable,Movable):
     var _v: Int
 
     fn __init__(out self, version: String) raises:

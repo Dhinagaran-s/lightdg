@@ -12,13 +12,13 @@ from collections import Optional
 # ===-----------------------------------------------------------------------===#
 
 
-@value
+@fieldwise_init
 struct _OwningListIter[
     list_mutability: Bool, //,
     T: Movable,
     list_origin: Origin[list_mutability],
     forward: Bool = True,
-]:
+](Copyable, Movable):
     """Iterator for List.
 
     Parameters:

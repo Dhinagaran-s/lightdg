@@ -2,10 +2,18 @@ from collections import Optional, List, Dict, KeyElement
 from lightbug_http.strings import to_string
 from lightbug_http.header import HeaderKey, write_header
 from lightbug_http.io.bytes import ByteWriter
+from hashlib.hasher import Hasher
 
 
-@value
-struct ResponseCookieKey(KeyElement):
+struct ResponseCookieKey(
+    Copyable,
+    EqualityComparable,
+    Hashable,
+    KeyElement,
+    Movable,
+    Stringable,
+    Writable,
+):
     var name: String
     var domain: String
     var path: String
@@ -31,20 +39,28 @@ struct ResponseCookieKey(KeyElement):
         )
 
     fn __moveinit__(out self: Self, owned existing: Self):
-        self.name = existing.name
-        self.domain = existing.domain
-        self.path = existing.path
+        self.name = existing.name^
+        self.domain = existing.domain^
+        self.path = existing.path^
 
     fn __copyinit__(out self: Self, existing: Self):
         self.name = existing.name
         self.domain = existing.domain
         self.path = existing.path
 
-    fn __hash__(self: Self) -> UInt:
-        return hash(self.name + "~" + self.domain + "~" + self.path)
+    fn __hash__[H: Hasher](self, mut hasher: H):
+        hasher.update(self.name)
+        hasher.update(self.domain)
+        hasher.update(self.path)
+    
+    fn __str__(self) -> String:
+        return self.name + "|" + self.domain + "|" + self.path
+
+    fn write_to[T: Writer](self, mut writer: T):
+        writer.write(self.__str__())
 
 
-@value
+
 struct ResponseCookieJar(Copyable, Movable, Sized, Stringable, Writable):
     var _inner: Dict[ResponseCookieKey, Cookie]
 
@@ -60,6 +76,12 @@ struct ResponseCookieJar(Copyable, Movable, Sized, Stringable, Writable):
         self._inner = Dict[ResponseCookieKey, Cookie]()
         for cookie in cookies:
             self.set_cookie(cookie)
+
+    fn __copyinit__(out self: Self, existing: Self):
+        self._inner = existing._inner
+
+    fn __moveinit__(out self: Self, owned existing: Self):
+        self._inner = existing._inner^
 
     @always_inline
     fn __setitem__(mut self, key: ResponseCookieKey, value: Cookie):
@@ -101,14 +123,11 @@ struct ResponseCookieJar(Copyable, Movable, Sized, Stringable, Writable):
     fn from_headers(mut self, headers: List[String]) raises:
         for header in headers:
             try:
-                self.set_cookie(Cookie.from_set_header(header))
+                self.set_cookie(Cookie.from_set_header(header[]))
             except:
-                raise Error("Failed to parse cookie header string " + header)
-
-    # fn encode_to(mut self, mut writer: ByteWriter):
-    #     for cookie in self._inner.values():
-    #         var v = cookie[].build_header_value()
-    #         write_header(writer, HeaderKey.SET_COOKIE, v)
+                raise Error(
+                    "Failed to parse cookie header string " + str(header)
+                )
 
     fn write_to[T: Writer](self, mut writer: T):
         for cookie in self._inner.values():

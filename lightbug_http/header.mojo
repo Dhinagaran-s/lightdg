@@ -20,8 +20,8 @@ struct HeaderKey:
     alias COOKIE = "cookie"
 
 
-@value
-struct Header(Writable, Stringable):
+@fieldwise_init
+struct Header(Writable, Stringable, Copyable, Movable):
     var key: String
     var value: String
 
@@ -37,8 +37,7 @@ fn write_header[T: Writer](mut writer: T, key: String, value: String):
     writer.write(key + ": ", value, lineBreak)
 
 
-@value
-struct Headers(Writable, Stringable):
+struct Headers(Writable, Stringable,Copyable,Movable):
     """Represents the header key/values in an http request/response.
 
     Header keys are normalized to lowercase

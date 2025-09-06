@@ -9,8 +9,8 @@ trait HTTPService:
         ...
 
 
-@value
-struct Printer(HTTPService):
+@fieldwise_init
+struct Printer(HTTPService,Copyable,Movable):
     fn func(mut self, req: HTTPRequest) raises -> HTTPResponse:
         print("Request URI:", req.uri.request_uri)
         print("Request protocol:", req.protocol)
@@ -23,8 +23,8 @@ struct Printer(HTTPService):
         return OK(req.body_raw)
 
 
-@value
-struct Welcome(HTTPService):
+@fieldwise_init
+struct Welcome(HTTPService,Copyable,Movable):
     fn func(mut self, req: HTTPRequest) raises -> HTTPResponse:
         if req.uri.path == "/":
             with open("static/lightbug_welcome.html", "r") as f:
@@ -37,8 +37,8 @@ struct Welcome(HTTPService):
         return NotFound(req.uri.path)
 
 
-@value
-struct ExampleRouter(HTTPService):
+@fieldwise_init
+struct ExampleRouter(HTTPService,Copyable,Movable):
     fn func(mut self, req: HTTPRequest) raises -> HTTPResponse:
         if req.uri.path == "/":
             print("I'm on the index path!")
@@ -52,8 +52,8 @@ struct ExampleRouter(HTTPService):
         return OK(req.body_raw)
 
 
-@value
-struct TechEmpowerRouter(HTTPService):
+@fieldwise_init
+struct TechEmpowerRouter(HTTPService,Copyable,Movable):
     fn func(mut self, req: HTTPRequest) raises -> HTTPResponse:
         if req.uri.path == "/plaintext":
             return OK("Hello, World!", "text/plain")
@@ -63,8 +63,8 @@ struct TechEmpowerRouter(HTTPService):
         return OK("Hello world!")  # text/plain is the default
 
 
-@value
-struct Counter(HTTPService):
+
+struct Counter(HTTPService,Copyable,Movable):
     var counter: Int
 
     fn __init__(out self):

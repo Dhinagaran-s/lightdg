@@ -25,8 +25,7 @@ struct StatusCode:
     alias INTERNAL_ERROR = 500
 
 
-@value
-struct HTTPResponse(Writable, Stringable, Encodable, Sized):
+struct HTTPResponse(Writable, Stringable, Encodable, Sized,Copyable,Movable):
     var headers: Headers
     var cookies: ResponseCookieJar
     var body_raw: Bytes

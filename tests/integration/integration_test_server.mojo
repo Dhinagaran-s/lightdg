@@ -1,8 +1,8 @@
 from lightbug_http import *
 
 
-@value
-struct IntegrationTestService(HTTPService):
+@fieldwise_init
+struct IntegrationTestService(HTTPService,Copyable,Movable):
     fn func(mut self, req: HTTPRequest) raises -> HTTPResponse:
         var p = req.uri.path
         if p == "/":

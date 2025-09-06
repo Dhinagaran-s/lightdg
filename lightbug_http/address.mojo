@@ -35,7 +35,9 @@ struct AddressConstants:
     alias EMPTY = ""
 
 
-trait Addr(Stringable, Representable, Writable, EqualityComparable, Movable, Copyable):
+trait Addr(
+    Copyable, EqualityComparable, Movable, Representable, Stringable, Writable
+):
     alias _type: StaticString
 
     fn __init__(out self):
@@ -69,8 +71,8 @@ trait AnAddrInfo:
         ...
 
 
-@value
-struct NetworkType(EqualityComparable, Movable, Copyable):
+@fieldwise_init
+struct NetworkType(Copyable, EqualityComparable, Movable):
     var value: String
 
     alias empty = NetworkType("")
@@ -131,8 +133,10 @@ struct NetworkType(EqualityComparable, Movable, Copyable):
         return self in (NetworkType.tcp6, NetworkType.udp6, NetworkType.ip6)
 
 
-@value
-struct TCPAddr[network: NetworkType = NetworkType.tcp4](Addr):
+@fieldwise_init
+struct TCPAddr[network: NetworkType = NetworkType.tcp4](
+    Addr, Copyable, Movable
+):
     alias _type = "TCPAddr"
     var ip: String
     var port: UInt16
@@ -148,7 +152,13 @@ struct TCPAddr[network: NetworkType = NetworkType.tcp4](Addr):
         self.port = port
         self.zone = ""
 
-    fn __init__(out self, network: NetworkType, ip: String, port: UInt16, zone: String = ""):
+    fn __init__(
+        out self,
+        network: NetworkType,
+        ip: String,
+        port: UInt16,
+        zone: String = "",
+    ):
         self.ip = ip
         self.port = port
         self.zone = zone
@@ -175,7 +185,11 @@ struct TCPAddr[network: NetworkType = NetworkType.tcp4](Addr):
         return False
 
     fn __eq__(self, other: Self) -> Bool:
-        return self.ip == other.ip and self.port == other.port and self.zone == other.zone
+        return (
+            self.ip == other.ip
+            and self.port == other.port
+            and self.zone == other.zone
+        )
 
     fn __ne__(self, other: Self) -> Bool:
         return not self == other
@@ -189,11 +203,22 @@ struct TCPAddr[network: NetworkType = NetworkType.tcp4](Addr):
         return String.write(self)
 
     fn write_to[W: Writer, //](self, mut writer: W):
-        writer.write("TCPAddr(", "ip=", repr(self.ip), ", port=", String(self.port), ", zone=", repr(self.zone), ")")
+        writer.write(
+            "TCPAddr(",
+            "ip=",
+            repr(self.ip),
+            ", port=",
+            String(self.port),
+            ", zone=",
+            repr(self.zone),
+            ")",
+        )
 
 
-@value
-struct UDPAddr[network: NetworkType = NetworkType.udp4](Addr):
+@fieldwise_init
+struct UDPAddr[network: NetworkType = NetworkType.udp4](
+    Addr, Copyable, Movable
+):
     alias _type = "UDPAddr"
     var ip: String
     var port: UInt16
@@ -236,7 +261,11 @@ struct UDPAddr[network: NetworkType = NetworkType.udp4](Addr):
         return False
 
     fn __eq__(self, other: Self) -> Bool:
-        return self.ip == other.ip and self.port == other.port and self.zone == other.zone
+        return (
+            self.ip == other.ip
+            and self.port == other.port
+            and self.zone == other.zone
+        )
 
     fn __ne__(self, other: Self) -> Bool:
         return not self == other
@@ -250,12 +279,21 @@ struct UDPAddr[network: NetworkType = NetworkType.udp4](Addr):
         return String.write(self)
 
     fn write_to[W: Writer, //](self, mut writer: W):
-        writer.write("UDPAddr(", "ip=", repr(self.ip), ", port=", String(self.port), ", zone=", repr(self.zone), ")")
+        writer.write(
+            "UDPAddr(",
+            "ip=",
+            repr(self.ip),
+            ", port=",
+            String(self.port),
+            ", zone=",
+            repr(self.zone),
+            ")",
+        )
 
 
-@value
+@fieldwise_init
 @register_passable("trivial")
-struct addrinfo_macos(AnAddrInfo):
+struct addrinfo_macos(AnAddrInfo, Copyable, Movable):
     """
     For MacOS, I had to swap the order of ai_canonname and ai_addr.
     https://stackoverflow.com/questions/53575101/calling-getaddrinfo-directly-from-python-ai-addr-is-null-pointer.
@@ -298,7 +336,12 @@ struct addrinfo_macos(AnAddrInfo):
             The IP address.
         """
         var result = UnsafePointer[Self]()
-        var hints = Self(ai_flags=0, ai_family=AddressFamily.AF_INET.value, ai_socktype=SOCK_STREAM, ai_protocol=0)
+        var hints = Self(
+            ai_flags=0,
+            ai_family=AddressFamily.AF_INET.value,
+            ai_socktype=SOCK_STREAM,
+            ai_protocol=0,
+        )
         try:
             getaddrinfo(host, String(), hints, result)
         except e:
@@ -307,16 +350,19 @@ struct addrinfo_macos(AnAddrInfo):
 
         if not result[].ai_addr:
             freeaddrinfo(result)
-            raise Error("Failed to get IP address because the response's `ai_addr` was null.")
+            raise Error(
+                "Failed to get IP address because the response's `ai_addr` was"
+                " null."
+            )
 
         var ip = result[].ai_addr.bitcast[sockaddr_in]()[].sin_addr
         freeaddrinfo(result)
         return ip
 
 
-@value
+@fieldwise_init
 @register_passable("trivial")
-struct addrinfo_unix(AnAddrInfo):
+struct addrinfo_unix(AnAddrInfo, Copyable, Movable):
     """Standard addrinfo struct for Unix systems.
     Overwrites the existing libc `getaddrinfo` function to adhere to the AnAddrInfo trait.
     """
@@ -358,7 +404,12 @@ struct addrinfo_unix(AnAddrInfo):
             The IP address.
         """
         var result = UnsafePointer[Self]()
-        var hints = Self(ai_flags=0, ai_family=AddressFamily.AF_INET.value, ai_socktype=SOCK_STREAM, ai_protocol=0)
+        var hints = Self(
+            ai_flags=0,
+            ai_family=AddressFamily.AF_INET.value,
+            ai_socktype=SOCK_STREAM,
+            ai_protocol=0,
+        )
         try:
             getaddrinfo(host, String(), hints, result)
         except e:
@@ -367,7 +418,10 @@ struct addrinfo_unix(AnAddrInfo):
 
         if not result[].ai_addr:
             freeaddrinfo(result)
-            raise Error("Failed to get IP address because the response's `ai_addr` was null.")
+            raise Error(
+                "Failed to get IP address because the response's `ai_addr` was"
+                " null."
+            )
 
         var ip = result[].ai_addr.bitcast[sockaddr_in]()[].sin_addr
         freeaddrinfo(result)
@@ -416,7 +470,11 @@ fn parse_ipv6_bracketed_address[
 
 fn validate_no_brackets[
     origin: ImmutableOrigin
-](address: StringSlice[origin], start_idx: UInt16, end_idx: Optional[UInt16] = None) raises:
+](
+    address: StringSlice[origin],
+    start_idx: UInt16,
+    end_idx: Optional[UInt16] = None,
+) raises:
     """Validate that the address segment contains no brackets."""
     var segment: StringSlice[origin]
 
@@ -431,7 +489,9 @@ fn validate_no_brackets[
         raise Error("unexpected ']' in address")
 
 
-fn parse_port[origin: ImmutableOrigin](port_str: StringSlice[origin]) raises -> UInt16:
+fn parse_port[
+    origin: ImmutableOrigin
+](port_str: StringSlice[origin]) raises -> UInt16:
     """Parse and validate port number."""
     if port_str == AddressConstants.EMPTY:
         raise MissingPortError
@@ -443,7 +503,12 @@ fn parse_port[origin: ImmutableOrigin](port_str: StringSlice[origin]) raises -> 
     return UInt16(port)
 
 
-fn parse_address[origin: ImmutableOrigin](network: NetworkType, address: StringSlice[origin]) raises -> (String, UInt16):
+fn parse_address[
+    origin: ImmutableOrigin
+](network: NetworkType, address: StringSlice[origin]) raises -> (
+    String,
+    UInt16,
+):
     """Parse an address string into a host and port.
 
     Args:
@@ -500,6 +565,7 @@ fn parse_address[origin: ImmutableOrigin](network: NetworkType, address: StringS
 
     return String(host), port
 
+
 # TODO: Support IPv6 long form.
 fn join_host_port(host: String, port: String) -> String:
     if host.find(":") != -1:  # must be IPv6 literal
@@ -523,7 +589,9 @@ fn binary_port_to_int(port: UInt16) -> Int:
     return Int(ntohs(port))
 
 
-fn binary_ip_to_string[address_family: AddressFamily](owned ip_address: UInt32) raises -> String:
+fn binary_ip_to_string[
+    address_family: AddressFamily
+](owned ip_address: UInt32) raises -> String:
     """Convert a binary IP address to a string by calling `inet_ntop`.
 
     Parameters:
@@ -543,15 +611,21 @@ fn binary_ip_to_string[address_family: AddressFamily](owned ip_address: UInt32) 
 
     @parameter
     if address_family == AddressFamily.AF_INET:
-        ip = inet_ntop[address_family, AddressLength.INET_ADDRSTRLEN](ip_address)
+        ip = inet_ntop[address_family, AddressLength.INET_ADDRSTRLEN](
+            ip_address
+        )
     else:
-        ip = inet_ntop[address_family, AddressLength.INET6_ADDRSTRLEN](ip_address)
+        ip = inet_ntop[address_family, AddressLength.INET6_ADDRSTRLEN](
+            ip_address
+        )
 
     return ip
 
 
 fn _getaddrinfo[
-    T: AnAddrInfo, hints_origin: ImmutableOrigin, result_origin: MutableOrigin, //
+    T: AnAddrInfo,
+    hints_origin: ImmutableOrigin,
+    result_origin: MutableOrigin, //,
 ](
     nodename: UnsafePointer[c_char, mut=False],
     servname: UnsafePointer[c_char, mut=False],
@@ -589,7 +663,12 @@ fn _getaddrinfo[
 
 fn getaddrinfo[
     T: AnAddrInfo, //
-](owned node: String, owned service: String, hints: T, mut res: UnsafePointer[T]) raises:
+](
+    owned node: String,
+    owned service: String,
+    hints: T,
+    mut res: UnsafePointer[T],
+) raises:
     """Libc POSIX `getaddrinfo` function.
 
     Args:
@@ -632,7 +711,9 @@ fn getaddrinfo[
         while err[i] != 0:
             i += 1
 
-        msg.write_bytes(Span[Byte, __origin_of(err)](ptr=err.bitcast[c_uchar](), length=i))
+        msg.write_bytes(
+            Span[Byte, __origin_of(err)](ptr=err.bitcast[c_uchar](), length=i)
+        )
         raise Error("getaddrinfo: ", msg)
 
 

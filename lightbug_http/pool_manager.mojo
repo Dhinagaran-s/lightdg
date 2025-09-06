@@ -5,8 +5,8 @@ from lightbug_http._owning_list import OwningList
 from lightbug_http.uri import Scheme
 
 
-@value
-struct PoolKey(Hashable, KeyElement, Writable, Stringable):
+
+struct PoolKey(Hashable, KeyElement, Writable, Stringable,Copyable,Movable):
     var host: String
     var port: UInt16
     var scheme: Scheme

@@ -73,8 +73,7 @@ alias EndOfReaderError = "No more bytes to read."
 alias OutOfBoundsError = "Tried to read past the end of the ByteReader."
 
 
-@value
-struct ByteView[origin: Origin](Sized, Stringable):
+struct ByteView[origin: Origin](Copyable, Movable, Sized, Stringable):
     """Convenience wrapper around a Span of Bytes."""
 
     var _inner: Span[Byte, origin]
@@ -293,4 +292,6 @@ struct ByteReader[origin: Origin](Sized):
 
     @always_inline
     fn consume(owned self, bytes_len: Int = -1) -> Bytes:
-        return Bytes(self^._inner[self.read_pos : self.read_pos + len(self) + 1])
+        return Bytes(
+            self^._inner[self.read_pos : self.read_pos + len(self) + 1]
+        )
