@@ -11,7 +11,7 @@ struct ExampleRouter(HTTPService):
 
         if uri.path == "/":
             print("I'm on the index path! in ", monotonic()-start_time)
-        if uri.path == "/first":
+        elif uri.path == "/first":
             print("I'm on /first! in ", monotonic()-start_time)
         elif uri.path == "/second":
             print("I'm on /second! in ", monotonic()-start_time)
