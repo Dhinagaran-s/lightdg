@@ -2,9 +2,9 @@ from utils.variant import Variant
 from collections import Dict, List, Optional
 from collections.dict import _DictEntryIter
 
-from lightbug_http import NotFound, OK, HTTPService, HTTPRequest, HTTPResponse
-from lightbug_http.http import RequestMethod
-from lightbug_http.uri import URIDelimiters
+from lightdg import NotFound, OK, HTTPService, HTTPRequest, HTTPResponse
+from lightdg.http import RequestMethod
+from lightdg.uri import URIDelimiters
 
 alias MAX_SUB_ROUTER_DEPTH = 20
 

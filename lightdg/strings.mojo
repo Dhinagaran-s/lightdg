@@ -1,5 +1,5 @@
 from memory import Span
-from lightbug_http.io.bytes import Bytes, bytes, byte
+from lightdg.io.bytes import Bytes, bytes, byte
 
 alias strSlash = "/"
 alias strHttp = "http"

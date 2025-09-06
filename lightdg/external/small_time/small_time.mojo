@@ -1,10 +1,10 @@
 # small_time library, courtesy @thatstoasty , 2025
 # https://github.com/thatstoasty/small-time/ 
 from collections import InlineArray, Optional
-import lightbug_http.external.small_time.c
-import lightbug_http.external.small_time.time_zone
-from lightbug_http.external.small_time.time_delta import TimeDelta
-from lightbug_http.external.small_time.formatter import formatter
+import lightdg.external.small_time.c
+import lightdg.external.small_time.time_zone
+from lightdg.external.small_time.time_delta import TimeDelta
+from lightdg.external.small_time.formatter import formatter
 
 
 alias _DI400Y = 146097
@@ -257,7 +257,7 @@ fn strptime(date_str: String, fmt: String, tzinfo: TimeZone = TimeZone()) raises
 
     Examples:
     ```mojo
-    from lightbug_http.external.small_time.small_time import strptime
+    from lightdg.external.small_time.small_time import strptime
     print(strptime('20-01-2019 15:49:10', '%d-%m-%Y %H:%M:%S'))
     ```
     .
@@ -284,7 +284,7 @@ fn strptime(date_str: String, fmt: String, tz_str: String) raises -> SmallTime:
 
     Examples:
     ```mojo
-    from lightbug_http.external.small_time.small_time import strptime
+    from lightdg.external.small_time.small_time import strptime
     print(strptime('20-01-2019 15:49:10', '%d-%m-%Y %H:%M:%S'))
     ```
     .

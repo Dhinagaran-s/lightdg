@@ -1,9 +1,9 @@
 from collections import Optional
-from lightbug_http.external.small_time.small_time import now
-from lightbug_http.uri import URI
-from lightbug_http.io.bytes import Bytes, bytes, byte, ByteReader, ByteWriter
-from lightbug_http.connection import TCPConnection, default_buffer_size
-from lightbug_http.strings import (
+from lightdg.external.small_time.small_time import now
+from lightdg.uri import URI
+from lightdg.io.bytes import Bytes, bytes, byte, ByteReader, ByteWriter
+from lightdg.connection import TCPConnection, default_buffer_size
+from lightdg.strings import (
     strHttp11,
     strHttp,
     strSlash,
@@ -238,7 +238,7 @@ struct HTTPResponse(Writable, Stringable, Encodable, Sized,Copyable,Movable):
         writer.write(self.protocol, whitespace, self.status_code, whitespace, self.status_text, lineBreak)
 
         if HeaderKey.SERVER not in self.headers:
-            writer.write("server: lightbug_http", lineBreak)
+            writer.write("server: lightdg", lineBreak)
 
         writer.write(self.headers, self.cookies, lineBreak, to_string(self.body_raw))
 
@@ -256,7 +256,7 @@ struct HTTPResponse(Writable, Stringable, Encodable, Sized,Copyable,Movable):
             whitespace,
             self.status_text,
             lineBreak,
-            "server: lightbug_http",
+            "server: lightdg",
             lineBreak,
         )
         if HeaderKey.DATE not in self.headers:

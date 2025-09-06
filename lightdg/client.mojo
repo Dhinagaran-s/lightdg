@@ -1,11 +1,11 @@
 from collections import Dict
-from lightbug_http.connection import TCPConnection, default_buffer_size, create_connection
-from lightbug_http.http import HTTPRequest, HTTPResponse, encode
-from lightbug_http.header import Headers, HeaderKey
-from lightbug_http.io.bytes import Bytes, ByteReader
-from lightbug_http._logger import logger
-from lightbug_http.pool_manager import PoolManager, PoolKey
-from lightbug_http.uri import URI, Scheme
+from lightdg.connection import TCPConnection, default_buffer_size, create_connection
+from lightdg.http import HTTPRequest, HTTPResponse, encode
+from lightdg.header import Headers, HeaderKey
+from lightdg.io.bytes import Bytes, ByteReader
+from lightdg._logger import logger
+from lightdg.pool_manager import PoolManager, PoolKey
+from lightdg.uri import URI, Scheme
 
 
 struct Client:
@@ -25,7 +25,7 @@ struct Client:
     ):
         self.host = host
         self.port = port
-        self.name = "lightbug_http_client"
+        self.name = "lightdg_client"
         self.allow_redirects = allow_redirects
         self._connections = PoolManager[TCPConnection](cached_connections)
 

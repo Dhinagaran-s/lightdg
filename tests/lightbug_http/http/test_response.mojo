@@ -1,6 +1,6 @@
 import testing
-from lightbug_http.http import HTTPResponse, StatusCode
-from lightbug_http.strings import to_string
+from lightdg.http import HTTPResponse, StatusCode
+from lightdg.strings import to_string
 
 
 def test_response_from_bytes():

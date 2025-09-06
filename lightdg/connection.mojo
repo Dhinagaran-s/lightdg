@@ -1,11 +1,11 @@
 from time import sleep
 from memory import Span
 # from sys.info import os_is_macos
-from lightbug_http.address import NetworkType
-from lightbug_http.io.bytes import Bytes, ByteView, bytes
-from lightbug_http.io.sync import Duration
-from lightbug_http.address import parse_address, TCPAddr, UDPAddr
-from lightbug_http._libc import (
+from lightdg.address import NetworkType
+from lightdg.io.bytes import Bytes, ByteView, bytes
+from lightdg.io.sync import Duration
+from lightdg.address import parse_address, TCPAddr, UDPAddr
+from lightdg._libc import (
     sockaddr,
     SOCK_DGRAM,
     SO_REUSEADDR,
@@ -18,8 +18,8 @@ from lightbug_http._libc import (
     shutdown,
     close,
 )
-from lightbug_http._logger import logger
-from lightbug_http.socket import Socket
+from lightdg._logger import logger
+from lightdg.socket import Socket
 
 
 alias default_buffer_size = 4096

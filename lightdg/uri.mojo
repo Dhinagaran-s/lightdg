@@ -1,6 +1,6 @@
 from collections import Optional, Dict
-from lightbug_http.io.bytes import Bytes, bytes, ByteReader
-from lightbug_http.strings import (
+from lightdg.io.bytes import Bytes, bytes, ByteReader
+from lightdg.strings import (
     find_all,
     strSlash,
     strHttp11,

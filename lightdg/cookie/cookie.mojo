@@ -1,5 +1,5 @@
 from collections import Optional
-from lightbug_http.header import HeaderKey
+from lightdg.header import HeaderKey
 
 
 struct Cookie(Copyable, Movable):

@@ -1,4 +1,4 @@
-from lightbug_http.io.bytes import Bytes
+from lightdg.io.bytes import Bytes
 
 
 fn OK(body: String, content_type: String = "text/plain") -> HTTPResponse:

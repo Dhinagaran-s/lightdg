@@ -1,8 +1,8 @@
 from collections import Dict, Optional
-from lightbug_http.io.bytes import Bytes, ByteReader, ByteWriter, is_newline, is_space
-from lightbug_http.strings import BytesConstant
-from lightbug_http._logger import logger
-from lightbug_http.strings import rChar, nChar, lineBreak, to_string
+from lightdg.io.bytes import Bytes, ByteReader, ByteWriter, is_newline, is_space
+from lightdg.strings import BytesConstant
+from lightdg._logger import logger
+from lightdg.strings import rChar, nChar, lineBreak, to_string
 
 
 struct HeaderKey:

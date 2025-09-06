@@ -13,7 +13,7 @@ from sys.info.CompilationTarget import is_linux, is_macos, is_windows
 from sys.info import sizeof
     
 from memory import memcpy, UnsafePointer, stack_allocation
-from lightbug_http.io.bytes import Bytes
+from lightdg.io.bytes import Bytes
 
 alias IPPROTO_IPV6 = 41
 alias IPV6_V6ONLY = 26

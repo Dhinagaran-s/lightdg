@@ -24,7 +24,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ secrets.DOCKERHUB_USERNAME }}/lightbug_http
+          images: ${{ secrets.DOCKERHUB_USERNAME }}/lightdg
           tags: ${{ inputs.tags }}
 
       - name: Set up Docker Buildx

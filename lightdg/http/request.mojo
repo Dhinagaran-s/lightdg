@@ -1,11 +1,11 @@
 from memory import Span
-from lightbug_http.io.bytes import Bytes, bytes, ByteReader, ByteWriter
-from lightbug_http.header import Headers, HeaderKey, Header, write_header
-from lightbug_http.cookie import RequestCookieJar
-from lightbug_http.uri import URI
-from lightbug_http._logger import logger
-from lightbug_http.io.sync import Duration
-from lightbug_http.strings import (
+from lightdg.io.bytes import Bytes, bytes, ByteReader, ByteWriter
+from lightdg.header import Headers, HeaderKey, Header, write_header
+from lightdg.cookie import RequestCookieJar
+from lightdg.uri import URI
+from lightdg._logger import logger
+from lightdg.io.sync import Duration
+from lightdg.strings import (
     strHttp11,
     strHttp,
     strSlash,

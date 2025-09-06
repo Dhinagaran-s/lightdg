@@ -1,5 +1,5 @@
 import testing
-from lightbug_http.address import TCPAddr, NetworkType, join_host_port, parse_address
+from lightdg.address import TCPAddr, NetworkType, join_host_port, parse_address
 
 
 def test_split_host_port():

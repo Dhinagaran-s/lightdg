@@ -1,4 +1,4 @@
-from lightbug_http import Welcome, Server
+from lightdg import Welcome, Server
 from os.env import getenv
 
 fn main() raises:

@@ -4,25 +4,25 @@ context:
   version: "25.4.0"
 
 package:
-  name: "lightbug_http"
+  name: "lightdg"
   version: 25.4.0
 
 source:
-  - path: ../lightbug_http
+  - path: ../lightdg
   - path: ../LICENSE
 
 build:
   script:
     - mkdir -p ${PREFIX}/lib/mojo
-    - magic run mojo package . -o ${PREFIX}/lib/mojo/lightbug_http.mojopkg
+    - magic run mojo package . -o ${PREFIX}/lib/mojo/lightdg.mojopkg
 
 requirements:
   run:
     - max >=25.4.0,<25.5.0
 
 about:
-  homepage: https://github.com/saviorand/lightbug_http
+  homepage: https://github.com/saviorand/lightdg
   license: MIT
   license_file: LICENSE
   summary: Lightbug is a simple and sweet HTTP framework for Mojo
-  repository: https://github.com/saviorand/lightbug_http
+  repository: https://github.com/saviorand/lightdg

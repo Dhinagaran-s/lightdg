@@ -1,20 +1,20 @@
 from python import Python, PythonObject
-from lightbug_http.io.bytes import Bytes
-from lightbug_http.error import ErrorHandler
-from lightbug_http.uri import URI
-from lightbug_http.http import HTTPRequest, HTTPResponse
-from lightbug_http.connection import Listener, Connection
-from lightbug_http.address import Addr, TCPAddr
-from lightbug_http.service import HTTPService, OK
-from lightbug_http.server import ServerTrait
-from lightbug_http.client import Client
-from lightbug_http.io.bytes import bytes
-from lightbug_http.header import Headers, Header
+from lightdg.io.bytes import Bytes
+from lightdg.error import ErrorHandler
+from lightdg.uri import URI
+from lightdg.http import HTTPRequest, HTTPResponse
+from lightdg.connection import Listener, Connection
+from lightdg.address import Addr, TCPAddr
+from lightdg.service import HTTPService, OK
+from lightdg.server import ServerTrait
+from lightdg.client import Client
+from lightdg.io.bytes import bytes
+from lightdg.header import Headers, Header
 
 alias default_server_conn_string = "http://localhost:8080"
 
 alias defaultExpectedGetResponse = bytes(
-    "HTTP/1.1 200 OK\r\nServer: lightbug_http\r\nContent-Type:"
+    "HTTP/1.1 200 OK\r\nServer: lightdg\r\nContent-Type:"
     " text/plain\r\nContent-Length: 12\r\nConnection: close\r\nDate:"
     " \r\n\r\nHello world!"
 )
@@ -59,7 +59,7 @@ struct FakeClient(Client):
     fn __init__(out self) raises:
         self.host = "127.0.0.1"
         self.port = 8888
-        self.name = "lightbug_http_fake_client"
+        self.name = "lightdg_fake_client"
         self.req_full_uri = URI("")
         self.req_host = ""
         self.req_is_tls = False
@@ -67,7 +67,7 @@ struct FakeClient(Client):
     fn __init__(out self, host: StringLiteral, port: Int) raises:
         self.host = host
         self.port = port
-        self.name = "lightbug_http_fake_client"
+        self.name = "lightdg_fake_client"
         self.req_full_uri = URI("")
         self.req_host = ""
         self.req_is_tls = False

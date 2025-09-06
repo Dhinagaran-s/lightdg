@@ -1,4 +1,4 @@
-from lightbug_http._owning_list import OwningList
+from lightdg._owning_list import OwningList
 from sys.info import sizeof
 
 from memory import UnsafePointer, Span

@@ -1,7 +1,7 @@
 import testing
 from collections import Dict, List
-from lightbug_http.io.bytes import Bytes, ByteView, bytes
-from lightbug_http.strings import to_string
+from lightdg.io.bytes import Bytes, ByteView, bytes
+from lightdg.strings import to_string
 
 
 fn test_string_literal_to_bytes() raises:

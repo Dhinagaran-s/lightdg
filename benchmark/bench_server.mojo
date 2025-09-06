@@ -1,5 +1,5 @@
-from lightbug_http.server import Server
-from lightbug_http.service import TechEmpowerRouter
+from lightdg.server import Server
+from lightdg.service import TechEmpowerRouter
 
 
 def main():

@@ -1,4 +1,4 @@
-from lightbug_http.http import (
+from lightdg.http import (
     HTTPRequest,
     HTTPResponse,
     OK,
@@ -6,9 +6,9 @@ from lightbug_http.http import (
     SeeOther,
     StatusCode,
 )
-from lightbug_http.uri import URI
-from lightbug_http.header import Header, Headers, HeaderKey
-from lightbug_http.cookie import Cookie, RequestCookieJar, ResponseCookieJar
-from lightbug_http.service import HTTPService, Welcome, Counter
-from lightbug_http.server import Server
-from lightbug_http.strings import to_string
+from lightdg.uri import URI
+from lightdg.header import Header, Headers, HeaderKey
+from lightdg.cookie import Cookie, RequestCookieJar, ResponseCookieJar
+from lightdg.service import HTTPService, Welcome, Counter
+from lightdg.server import Server
+from lightdg.strings import to_string

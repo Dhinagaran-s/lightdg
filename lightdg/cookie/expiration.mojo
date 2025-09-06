@@ -1,6 +1,6 @@
 from collections import Optional
-from lightbug_http.external.small_time import SmallTime
-from lightbug_http.strings import to_string
+from lightdg.external.small_time import SmallTime
+from lightdg.strings import to_string
 
 alias HTTP_DATE_FORMAT = "ddd, DD MMM YYYY HH:mm:ss ZZZ"
 alias TZ_GMT = TimeZone(0, "GMT")

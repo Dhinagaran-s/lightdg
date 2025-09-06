@@ -1,8 +1,8 @@
 from collections import Dict
-from lightbug_http.connection import create_connection, TCPConnection, Connection
-from lightbug_http._logger import logger
-from lightbug_http._owning_list import OwningList
-from lightbug_http.uri import Scheme
+from lightdg.connection import create_connection, TCPConnection, Connection
+from lightdg._logger import logger
+from lightdg._owning_list import OwningList
+from lightdg.uri import Scheme
 
 
 

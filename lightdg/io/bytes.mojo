@@ -1,6 +1,6 @@
 from memory.span import Span, _SpanIter, UnsafePointer
-from lightbug_http.strings import BytesConstant
-from lightbug_http.connection import default_buffer_size
+from lightdg.strings import BytesConstant
+from lightdg.connection import default_buffer_size
 
 
 alias Bytes = List[Byte, True]

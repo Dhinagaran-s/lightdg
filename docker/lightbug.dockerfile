@@ -2,9 +2,9 @@ FROM ghcr.io/modular/magic:latest
 
 RUN apt-get update && apt-get install -y git
 
-RUN git clone https://github.com/Lightbug-HQ/lightbug_http
+RUN git clone https://github.com/Lightbug-HQ/lightdg
 
-WORKDIR /lightbug_http
+WORKDIR /lightdg
 
 ARG DEFAULT_SERVER_PORT=8080
 ARG DEFAULT_SERVER_HOST=localhost

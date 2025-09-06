@@ -1,5 +1,5 @@
-from lightbug_http.connection import listen_udp
-from lightbug_http.address import UDPAddr
+from lightdg.connection import listen_udp
+from lightdg.address import UDPAddr
 
 
 fn main() raises:

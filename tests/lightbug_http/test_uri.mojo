@@ -1,7 +1,7 @@
 import testing
-from lightbug_http.uri import URI
-from lightbug_http.strings import empty_string, to_string
-from lightbug_http.io.bytes import Bytes
+from lightdg.uri import URI
+from lightdg.strings import empty_string, to_string
+from lightdg.io.bytes import Bytes
 
 
 def test_uri_no_parse_defaults():

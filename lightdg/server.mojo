@@ -1,15 +1,15 @@
-from lightbug_http.io.sync import Duration
-from lightbug_http.io.bytes import Bytes, BytesConstant, ByteView, ByteReader, bytes
-from lightbug_http.address import NetworkType
-from lightbug_http._logger import logger
-from lightbug_http.connection import NoTLSListener, default_buffer_size, TCPConnection, ListenConfig
-from lightbug_http.socket import Socket
-from lightbug_http.http import HTTPRequest, encode
-from lightbug_http.http.common_response import InternalError, BadRequest, URITooLong
-from lightbug_http.uri import URI
-from lightbug_http.header import Headers
-from lightbug_http.service import HTTPService
-from lightbug_http.error import ErrorHandler
+from lightdg.io.sync import Duration
+from lightdg.io.bytes import Bytes, BytesConstant, ByteView, ByteReader, bytes
+from lightdg.address import NetworkType
+from lightdg._logger import logger
+from lightdg.connection import NoTLSListener, default_buffer_size, TCPConnection, ListenConfig
+from lightdg.socket import Socket
+from lightdg.http import HTTPRequest, encode
+from lightdg.http.common_response import InternalError, BadRequest, URITooLong
+from lightdg.uri import URI
+from lightdg.header import Headers
+from lightdg.service import HTTPService
+from lightdg.error import ErrorHandler
 
 
 alias DefaultConcurrency: Int = 256 * 1024
@@ -34,7 +34,7 @@ struct Server(Movable):
     fn __init__(
         out self,
         error_handler: ErrorHandler = ErrorHandler(),
-        name: String = "lightbug_http",
+        name: String = "lightdg",
         address: String = "127.0.0.1",
         max_concurrent_connections: UInt = 1000,
         max_requests_per_connection: UInt = 0,

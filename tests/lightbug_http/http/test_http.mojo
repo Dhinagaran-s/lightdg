@@ -1,12 +1,12 @@
 import testing
 from testing import assert_true, assert_equal
 from collections import Dict, List
-from lightbug_http.io.bytes import Bytes, bytes
-from lightbug_http.http import HTTPRequest, HTTPResponse, encode, HttpVersion
-from lightbug_http.header import Header, Headers, HeaderKey
-from lightbug_http.cookie import Cookie, ResponseCookieJar, RequestCookieJar, Duration, ResponseCookieKey
-from lightbug_http.uri import URI
-from lightbug_http.strings import to_string
+from lightdg.io.bytes import Bytes, bytes
+from lightdg.http import HTTPRequest, HTTPResponse, encode, HttpVersion
+from lightdg.header import Header, Headers, HeaderKey
+from lightdg.cookie import Cookie, ResponseCookieJar, RequestCookieJar, Duration, ResponseCookieKey
+from lightdg.uri import URI
+from lightdg.strings import to_string
 
 alias default_server_conn_string = "http://localhost:8080"
 
@@ -43,7 +43,7 @@ def test_encode_http_response():
     )
     var as_str = String(res)
     var res_encoded = to_string(encode(res^))
-    var expected_full = "HTTP/1.1 200 OK\r\nserver: lightbug_http\r\ncontent-type: application/octet-stream\r\nconnection: keep-alive\r\ncontent-length: 13\r\ndate: 2024-06-02T13:41:50.766880+00:00\r\nset-cookie: session_id=123; Path=/api; Secure\r\nset-cookie: session_id=abc; Max-Age=600; Path=/; Secure\r\nset-cookie: token=123; Domain=localhost; Path=/api; HttpOnly\r\n\r\nHello, World!"
+    var expected_full = "HTTP/1.1 200 OK\r\nserver: lightdg\r\ncontent-type: application/octet-stream\r\nconnection: keep-alive\r\ncontent-length: 13\r\ndate: 2024-06-02T13:41:50.766880+00:00\r\nset-cookie: session_id=123; Path=/api; Secure\r\nset-cookie: session_id=abc; Max-Age=600; Path=/; Secure\r\nset-cookie: token=123; Domain=localhost; Path=/api; HttpOnly\r\n\r\nHello, World!"
 
     testing.assert_equal(res_encoded, expected_full)
     testing.assert_equal(res_encoded, as_str)
@@ -52,7 +52,7 @@ def test_encode_http_response():
 def test_decoding_http_response():
     var res = String(
         "HTTP/1.1 200 OK\r\n"
-        "server: lightbug_http\r\n"
+        "server: lightdg\r\n"
         "content-type: application/octet-stream\r\n"
         "connection: keep-alive\r\ncontent-length: 13\r\n"
         "date: 2024-06-02T13:41:50.766880+00:00\r\n"

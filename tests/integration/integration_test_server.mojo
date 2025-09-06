@@ -1,4 +1,4 @@
-from lightbug_http import *
+from lightdg import *
 
 
 @fieldwise_init

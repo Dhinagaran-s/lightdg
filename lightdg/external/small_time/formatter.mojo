@@ -3,7 +3,7 @@
 from collections import InlineArray
 from collections.string import StringSlice
 from utils import StaticTuple
-from lightbug_http.external.small_time.time_zone import UTC_TZ
+from lightdg.external.small_time.time_zone import UTC_TZ
 
 alias MONTH_NAMES = InlineArray[String, 13](
     "",

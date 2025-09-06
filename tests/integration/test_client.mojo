@@ -1,9 +1,9 @@
 import testing
-from lightbug_http.client import Client
-from lightbug_http.http import HTTPRequest, encode
-from lightbug_http.uri import URI
-from lightbug_http.header import Header, Headers
-from lightbug_http.io.bytes import bytes
+from lightdg.client import Client
+from lightdg.http import HTTPRequest, encode
+from lightdg.uri import URI
+from lightdg.header import Header, Headers
+from lightdg.io.bytes import bytes
 
 
 fn test_mojo_client_redirect_external_req_google() raises:

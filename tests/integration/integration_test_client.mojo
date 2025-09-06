@@ -1,7 +1,7 @@
 from collections import Dict
-from lightbug_http import *
-from lightbug_http.client import Client
-from lightbug_http._logger import logger
+from lightdg import *
+from lightdg.client import Client
+from lightdg._logger import logger
 from testing import *
 
 

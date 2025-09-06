@@ -1,7 +1,7 @@
 # small_time library, courtesy @thatstoasty , 2025
 # https://github.com/thatstoasty/small-time/ 
 from collections import Optional
-import lightbug_http.external.small_time.c
+import lightdg.external.small_time.c
 
 alias UTC = "UTC"
 alias UTC_TZ = TimeZone(0, UTC)

@@ -1,5 +1,5 @@
-from lightbug_http import *
-from lightbug_http.client import Client
+from lightdg import *
+from lightdg.client import Client
 
 
 fn test_request(mut client: Client) raises -> None:

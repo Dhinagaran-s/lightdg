@@ -1,5 +1,5 @@
 import testing
-from lightbug_http.server import Server
+from lightdg.server import Server
 
 
 def test_server():

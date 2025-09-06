@@ -1,4 +1,4 @@
-from lightbug_http import *
+from lightdg import *
 from os.env import getenv
 from time import monotonic
 
@@ -26,6 +26,6 @@ fn main() raises:
     var handler = ExampleRouter()
 
     var host = getenv("DEFAULT_SERVER_HOST", "localhost")
-    var port = getenv("DEFAULT_SERVER_PORT", "8086")
+    var port = getenv("DEFAULT_SERVER_PORT", "8087")
 
     server.listen_and_serve(host + ":" + port, handler)

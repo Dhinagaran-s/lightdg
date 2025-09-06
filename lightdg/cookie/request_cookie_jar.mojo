@@ -1,9 +1,9 @@
 from collections import Optional, List, Dict
-from lightbug_http.external.small_time import SmallTime, TimeZone
-from lightbug_http.external.small_time.small_time import strptime
-from lightbug_http.strings import to_string, lineBreak
-from lightbug_http.header import HeaderKey, write_header
-from lightbug_http.io.bytes import ByteReader, ByteWriter, is_newline, is_space
+from lightdg.external.small_time import SmallTime, TimeZone
+from lightdg.external.small_time.small_time import strptime
+from lightdg.strings import to_string, lineBreak
+from lightdg.header import HeaderKey, write_header
+from lightdg.io.bytes import ByteReader, ByteWriter, is_newline, is_space
 
 
 struct RequestCookieJar(Writable, Stringable, Copyable, Movable):

@@ -1,5 +1,5 @@
-from lightbug_http.cookie import SameSite, Cookie, Duration, Expiration
-from lightbug_http.external.small_time.small_time import SmallTime, now
+from lightdg.cookie import SameSite, Cookie, Duration, Expiration
+from lightdg.external.small_time.small_time import SmallTime, now
 from testing import assert_true, assert_equal
 from collections import Optional
 

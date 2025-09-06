@@ -1,5 +1,5 @@
 import testing
-from lightbug_http.service import Printer, Welcome, ExampleRouter, TechEmpowerRouter, Counter
+from lightdg.service import Printer, Welcome, ExampleRouter, TechEmpowerRouter, Counter
 
 
 def test_printer():

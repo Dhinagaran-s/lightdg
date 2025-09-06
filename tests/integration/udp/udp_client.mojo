@@ -1,5 +1,5 @@
-from lightbug_http.connection import dial_udp
-from lightbug_http.address import UDPAddr
+from lightdg.connection import dial_udp
+from lightdg.address import UDPAddr
 
 alias test_string = "Hello, lightbug!"
 

@@ -1,4 +1,4 @@
-from lightbug_http.http import HTTPResponse
+from lightdg.http import HTTPResponse
 
 alias TODO_MESSAGE = "TODO".as_bytes()
 

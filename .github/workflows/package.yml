@@ -14,10 +14,10 @@ jobs:
           run: |
             curl -ssL https://magic.modular.com | bash
             source $HOME/.bash_profile
-            magic run mojo package lightbug_http -o lightbug_http.mojopkg
+            magic run mojo package lightdg -o lightdg.mojopkg
         
         - name: Upload package as artifact
           uses: actions/upload-artifact@v4
           with:
-            name: lightbug_http-package
-            path: lightbug_http.mojopkg
+            name: lightdg-package
+            path: lightdg.mojopkg

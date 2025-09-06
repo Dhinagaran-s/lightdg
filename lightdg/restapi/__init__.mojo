@@ -1,4 +1,4 @@
-from lightbug_http import HTTPRequest, HTTPResponse, Server
+from lightdg import HTTPRequest, HTTPResponse, Server
 from lightbug_api.routing import (
     BaseRequest,
     FromReq,

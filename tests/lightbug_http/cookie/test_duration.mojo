@@ -1,5 +1,5 @@
 import testing
-from lightbug_http.cookie.duration import Duration
+from lightdg.cookie.duration import Duration
 
 
 def test_from_string():

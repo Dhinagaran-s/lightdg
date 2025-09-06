@@ -1,10 +1,10 @@
 from memory import UnsafePointer, Span
 from collections import Optional
 from sys.ffi import external_call, OpaquePointer
-from lightbug_http.strings import to_string
-from lightbug_http._logger import logger
-from lightbug_http.socket import Socket
-from lightbug_http._libc import (
+from lightdg.strings import to_string
+from lightdg._logger import logger
+from lightdg.socket import Socket
+from lightdg._libc import (
     c_int,
     c_char,
     c_uchar,
