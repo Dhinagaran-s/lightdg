@@ -43,9 +43,7 @@ struct HTTPRequest(Copyable, Encodable, Movable, Stringable, Writable):
     var timeout: Duration
 
     @staticmethod
-    fn from_bytes(
-        addr: String, max_body_size: Int, max_uri_length: Int, b: Span[Byte]
-    ) raises -> HTTPRequest:
+    fn from_bytes(addr: String, max_body_size: Int, max_uri_length: Int, b: Span[Byte]) raises -> HTTPRequest:
         var reader = ByteReader(b)
         var headers = Headers()
         var method: String
@@ -55,10 +53,7 @@ struct HTTPRequest(Copyable, Encodable, Movable, Stringable, Writable):
             var rest = headers.parse_raw(reader)
             method, uri, protocol = rest[0], rest[1], rest[2]
         except e:
-            raise Error(
-                "HTTPRequest.from_bytes: Failed to parse request headers: "
-                + String(e)
-            )
+            raise Error("HTTPRequest.from_bytes: Failed to parse request headers: " + String(e))
 
         if len(uri.as_bytes()) > max_uri_length:
             raise Error("HTTPRequest.from_bytes: Request URI too long")
@@ -67,16 +62,10 @@ struct HTTPRequest(Copyable, Encodable, Movable, Stringable, Writable):
         try:
             cookies.parse_cookies(headers)
         except e:
-            raise Error(
-                "HTTPRequest.from_bytes: Failed to parse cookies: " + String(e)
-            )
+            raise Error("HTTPRequest.from_bytes: Failed to parse cookies: " + String(e))
 
         var content_length = headers.content_length()
-        if (
-            content_length > 0
-            and max_body_size > 0
-            and content_length > max_body_size
-        ):
+        if content_length > 0 and max_body_size > 0 and content_length > max_body_size:
             raise Error("HTTPRequest.from_bytes: Request body too large.")
 
         var request = HTTPRequest(
@@ -92,10 +81,7 @@ struct HTTPRequest(Copyable, Encodable, Movable, Stringable, Writable):
                 reader.skip_carriage_return()
                 request.read_body(reader, content_length, max_body_size)
             except e:
-                raise Error(
-                    "HTTPRequest.from_bytes: Failed to read request body: "
-                    + String(e)
-                )
+                raise Error("HTTPRequest.from_bytes: Failed to read request body: " + String(e))
 
         return request
 
@@ -144,9 +130,7 @@ struct HTTPRequest(Copyable, Encodable, Movable, Stringable, Writable):
         return result.value() == "close"
 
     @always_inline
-    fn read_body(
-        mut self, mut r: ByteReader, content_length: Int, max_body_size: Int
-    ) raises -> None:
+    fn read_body(mut self, mut r: ByteReader, content_length: Int, max_body_size: Int) raises -> None:
         if content_length > max_body_size:
             raise Error("Request body too large")
 
@@ -155,17 +139,14 @@ struct HTTPRequest(Copyable, Encodable, Movable, Stringable, Writable):
             self.set_content_length(len(self.body_raw))
         except OutOfBoundsError:
             logger.debug(
-                "Failed to read full request body as per content-length header."
-                " Proceeding with the available bytes."
+                "Failed to read full request body as per content-length header. Proceeding with the available bytes."
             )
             var available_bytes = len(r._inner) - r.read_pos
             if available_bytes > 0:
                 self.body_raw = r.read_bytes(available_bytes).to_bytes()
                 self.set_content_length(len(self.body_raw))
             else:
-                logger.debug(
-                    "No body bytes available. Setting content-length to 0."
-                )
+                logger.debug("No body bytes available. Setting content-length to 0.")
                 self.body_raw = Bytes()
                 self.set_content_length(0)
 

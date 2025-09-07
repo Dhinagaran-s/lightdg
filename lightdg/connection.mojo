@@ -1,5 +1,6 @@
 from time import sleep
 from memory import Span
+
 # from sys.info import os_is_macos
 from lightdg.address import NetworkType
 from lightdg.io.bytes import Bytes, ByteView, bytes

@@ -6,7 +6,7 @@ from lightdg.header import HeaderKey, write_header
 from lightdg.io.bytes import ByteReader, ByteWriter, is_newline, is_space
 
 
-struct RequestCookieJar(Writable, Stringable, Copyable, Movable):
+struct RequestCookieJar(Copyable, Movable, Stringable, Writable):
     var _inner: Dict[String, String]
 
     fn __init__(out self):

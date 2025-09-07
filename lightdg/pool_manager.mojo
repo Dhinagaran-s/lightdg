@@ -5,8 +5,7 @@ from lightdg._owning_list import OwningList
 from lightdg.uri import Scheme
 
 
-
-struct PoolKey(Hashable, KeyElement, Writable, Stringable,Copyable,Movable):
+struct PoolKey(Copyable, Hashable, KeyElement, Movable, Stringable, Writable):
     var host: String
     var port: UInt16
     var scheme: Scheme

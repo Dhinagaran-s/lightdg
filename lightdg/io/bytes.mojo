@@ -292,6 +292,4 @@ struct ByteReader[origin: Origin](Sized):
 
     @always_inline
     fn consume(owned self, bytes_len: Int = -1) -> Bytes:
-        return Bytes(
-            self^._inner[self.read_pos : self.read_pos + len(self) + 1]
-        )
+        return Bytes(self^._inner[self.read_pos : self.read_pos + len(self) + 1])
