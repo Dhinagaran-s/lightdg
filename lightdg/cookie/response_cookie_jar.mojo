@@ -126,7 +126,7 @@ struct ResponseCookieJar(Copyable, Movable, Sized, Stringable, Writable):
                 self.set_cookie(Cookie.from_set_header(header[]))
             except:
                 raise Error(
-                    "Failed to parse cookie header string " + str(header)
+                    "Failed to parse cookie header string " + String(header)
                 )
 
     fn write_to[T: Writer](self, mut writer: T):

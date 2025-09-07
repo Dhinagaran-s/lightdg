@@ -9,8 +9,8 @@ from sys.ffi import (
     c_ushort,
     c_uint,
 )
-from sys.info.CompilationTarget import is_linux, is_macos, is_windows
-from sys.info import sizeof
+# from sys.CompilationTarget import is_linux, is_macos, is_windows
+from sys.info import sizeof,CompilationTarget
     
 from memory import memcpy, UnsafePointer, stack_allocation
 from lightdg.io.bytes import Bytes
@@ -1522,15 +1522,15 @@ fn accept(socket: c_int) raises -> c_int:
         elif errno == EPROTO:
             raise Error("accept: Protocol error.")
 
-        # @parameter
-        # if os_is_linux():
-        #     if errno == EPERM:
-        #         raise Error("accept: Firewall rules forbid connection.")
-        # raise Error(
-        #     "accept: An error occurred while listening on the socket. Error"
-        #     " code: "
-        #     + String(errno)
-        # )
+        @parameter
+        if CompilationTarget.is_linux():
+            if errno == EPERM:
+                raise Error("accept: Firewall rules forbid connection.")
+        raise Error(
+            "accept: An error occurred while listening on the socket. Error"
+            " code: "
+            + String(errno)
+        )
 
     return result
 
@@ -2388,11 +2388,11 @@ fn get_errno() -> c_int:
     Returns:
         A copy of the current value of `errno` for the current thread.
     """
-    # @parameter
-    # if os_is_windows():
-    #     var errno = stack_allocation[1, c_int]()
-    #     _ = external_call["_get_errno", c_void](errno)
-    #     return errno[]
-    # else:
-    alias loc = "__errno_location"
-    return external_call[loc, UnsafePointer[c_int]]()[]
+    @parameter
+    if CompilationTarget.is_windows():
+        var errno = stack_allocation[1, c_int]()
+        _ = external_call["_get_errno", c_void](errno)
+        return errno[]
+    else:
+        alias loc = "__errno_location"
+        return external_call[loc, UnsafePointer[c_int]]()[]
