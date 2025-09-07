@@ -21,8 +21,8 @@ requirements:
     - max >=25.4.0,<25.5.0
 
 about:
-  homepage: https://github.com/saviorand/lightdg
+  homepage: https://github.com/Dhinagaran-s/lightdg
   license: MIT
   license_file: LICENSE
   summary: Lightbug is a simple and sweet HTTP framework for Mojo
-  repository: https://github.com/saviorand/lightdg
+  repository: https://github.com/Dhinagaran-s/lightdg

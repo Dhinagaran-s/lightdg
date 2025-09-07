@@ -279,17 +279,17 @@ fn main() raises:
 
 We're working on support for the following (contributors welcome!):
 
- - [ ] [JSON support](https://github.com/saviorand/lightdg/issues/4)
+ - [ ] [JSON support](https://github.com/Dhinagaran-s/lightdg/issues/4)
  - [ ] Complete HTTP/1.x support compliant with RFC 9110/9112 specs (see issues)
- - [ ] [SSL/HTTPS support](https://github.com/saviorand/lightdg/issues/20)
- - [ ] [Multiple simultaneous connections](https://github.com/saviorand/lightdg/issues/5), [parallelization and performance optimizations](https://github.com/saviorand/lightdg/issues/6)
- - [ ] [HTTP 2.0/3.0 support](https://github.com/saviorand/lightdg/issues/8)
+ - [ ] [SSL/HTTPS support](https://github.com/Dhinagaran-s/lightdg/issues/20)
+ - [ ] [Multiple simultaneous connections](https://github.com/Dhinagaran-s/lightdg/issues/5), [parallelization and performance optimizations](https://github.com/Dhinagaran-s/lightdg/issues/6)
+ - [ ] [HTTP 2.0/3.0 support](https://github.com/Dhinagaran-s/lightdg/issues/8)
 
 The plan is to get to a feature set similar to Python frameworks like [Starlette](https://github.com/encode/starlette), but with better performance.
 
 Our vision is to develop three libraries, with `lightdg` (this repo) as a starting point: 
  - `lightdg` - Lightweight and simple HTTP framework, basic networking primitives
- - [`lightdg_api`](https://github.com/saviorand/lightdg_api) - Tools to make great APIs fast, with OpenAPI support and automated docs
+ - [`lightdg_api`](https://github.com/Dhinagaran-s/lightdg_api) - Tools to make great APIs fast, with OpenAPI support and automated docs
  - `lightdg_web` - (release date TBD) Full-stack web framework for Mojo, similar to NextJS or SvelteKit
 
 The idea is to get to a point where the entire codebase of a simple modern web application can be written in Mojo. 
@@ -297,7 +297,7 @@ The idea is to get to a point where the entire codebase of a simple modern web a
 We don't make any promises, though -- this is just a vision, and whether we get there or not depends on many factors, including the support of the community.
 
 
-See the [open issues](https://github.com/saviorand/lightdg/issues) and submit your own to help drive the development of Lightdg.
+See the [open issues](https://github.com/Dhinagaran-s/lightdg/issues) and submit your own to help drive the development of Lightdg.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -335,7 +335,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 [Valentin Erokhin](https://www.valentin.wiki/)
 
-Project Link: [https://github.com/saviorand/mojo-web](https://github.com/saviorand/mojo-web)
+Project Link: [https://github.com/Dhinagaran-s/mojo-web](https://github.com/Dhinagaran-s/mojo-web)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -356,7 +356,7 @@ We were drawing a lot on the following projects:
 ## Contributors
 Want your name to show up here? See [CONTRIBUTING.md](./CONTRIBUTING.md)!
 
-<a href="https://github.com/saviorand/lightdg/graphs/contributors">
+<a href="https://github.com/Dhinagaran-s/lightdg/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=saviorand/lightdg&max=100" />
 </a>
 
@@ -367,8 +367,8 @@ Want your name to show up here? See [CONTRIBUTING.md](./CONTRIBUTING.md)!
 [build-shield]: https://img.shields.io/github/actions/workflow/status/saviorand/lightdg/.github%2Fworkflows%2Fpackage.yml
 [language-shield]: https://img.shields.io/badge/language-mojo-orange
 [license-shield]: https://img.shields.io/github/license/saviorand/lightdg?logo=github
-[license-url]: https://github.com/saviorand/lightdg/blob/main/LICENSE
+[license-url]: https://github.com/Dhinagaran-s/lightdg/blob/main/LICENSE
 [contributors-shield]: https://img.shields.io/badge/contributors-welcome!-blue
-[contributors-url]: https://github.com/saviorand/lightdg#contributing
+[contributors-url]: https://github.com/Dhinagaran-s/lightdg#contributing
 [discord-shield]: https://img.shields.io/discord/1192127090271719495?style=flat&logo=discord&logoColor=white
 [discord-url]: https://discord.gg/VFWETkTgrr
